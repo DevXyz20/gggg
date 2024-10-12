@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #5865F2; /* Discord color */
+        }
+        .btn {
+            background-color: #5865F2;
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #4752C4;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Verify Your Discord Account</h1>
+    <p>Please click the button below to verify your Discord account.</p>
+
+    <!-- Button to trigger Discord OAuth2 -->
+    <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=https://your-github-username.github.io/&response_type=code&scope=identify%20guilds.join" class="btn">
+        Verify with Discord
+    </a>
+
+    <!-- Status section (will show result after redirection) -->
+    <div class="status" id="statusMessage"></div>
+
+    <script>
+        // Get the URL parameters to check if there's a 'status' query (success or failure)
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        // Display success or failure message
+        if (status === 'success') {
+            document.getElementById('statusMessage').innerHTML = "🎉 Verification Successful! You can now access all channels.";
+        } else if (status === 'error') {
+            document.getElementById('statusMessage').innerHTML = "❌ Verification Failed. Please try again.";
+        }
+    </script>
+</body>
+</html>
